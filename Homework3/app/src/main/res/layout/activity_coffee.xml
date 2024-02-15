@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CoffeeActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/returnBtnCoffee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@android:drawable/ic_menu_revert"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/whatView"
+        android:layout_width="414dp"
+        android:layout_height="34dp"
+        android:background="#B67E0A"
+        android:paddingLeft="10dp"
+        android:paddingTop="7dp"
+        android:text="What kind of Coffee?"
+        android:textAlignment="textStart"
+        android:textColor="#FEFEFE"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar5" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="351dp"
+        android:layout_height="144dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/whatView">
+
+        <RadioButton
+            android:id="@+id/decaf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Decaf" />
+
+        <RadioButton
+            android:id="@+id/espresso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Espresso" />
+
+        <RadioButton
+            android:id="@+id/colombian"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Colombian" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/elseView"
+        android:layout_width="411dp"
+        android:layout_height="35dp"
+        android:background="#B67E0A"
+        android:paddingLeft="10dp"
+        android:paddingTop="7dp"
+        android:text="What else do you like in your Coffee?"
+        android:textColor="#FEFEFE"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+    <CheckBox
+        android:id="@+id/cream"
+        android:layout_width="355dp"
+        android:layout_height="48dp"
+        android:text="Cream"
+        app:layout_constraintEnd_toEndOf="@+id/radioGroup"
+        app:layout_constraintStart_toStartOf="@+id/radioGroup"
+        app:layout_constraintTop_toBottomOf="@+id/elseView" />
+
+    <CheckBox
+        android:id="@+id/sugar"
+        android:layout_width="355dp"
+        android:layout_height="48dp"
+        android:text="Sugar"
+        app:layout_constraintEnd_toEndOf="@+id/cream"
+        app:layout_constraintStart_toStartOf="@+id/cream"
+        app:layout_constraintTop_toBottomOf="@+id/cream" />
+
+    <Button
+        android:id="@+id/payBtn"
+        android:layout_width="155dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="60dp"
+        android:background="#C2C2C2"
+        android:text="PAY"
+        android:textColor="#1B1A1A"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:cornerRadius="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sugar" />
+</androidx.constraintlayout.widget.ConstraintLayout>

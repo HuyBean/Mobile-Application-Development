@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Ứng dụng đa ngôn ngữ</string>
+    <string name="description">Nội dung abcxyz</string>
+    <string name="untranslatable">this is the unstanlatable text</string>
+</resources>

@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Project-StartActivity</string>
+    <string name="secondActivity">Second Activity</string>
+    <string name="toSecondActivity">SEND DATA TO 2ND ACTIVITY</string>
+    <string name="toMainActivity">BACK DATA TO MAIN ACTIVITY</string>
+    <string name="dataFromMain">Data from Main Activity</string>
+    <string name="dataFromSecond">Data from Second Activity</string>
+</resources>

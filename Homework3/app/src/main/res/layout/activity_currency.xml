@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:textAlignment="center"
+    tools:context=".CurrencyActivity">
+
+    <ImageButton
+        android:id="@+id/returnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:translationZ="10dp"
+        app:layout_constraintTop_toTopOf="@+id/toolbar3"
+        app:srcCompat="@android:drawable/ic_menu_revert"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="2dp" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar3"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:background="#00BCD4"
+        android:minHeight="?attr/actionBarSize"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/currencyConvert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/currency_converter"
+        android:textColor="#676161"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
+
+    <TextView
+        android:id="@+id/enterAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/enter_amount"
+        android:textColor="#C2C2C2"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/currencyConvert"
+        app:layout_constraintTop_toBottomOf="@+id/currencyConvert" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/inputAmount"
+        android:layout_width="291dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="12dp"
+        android:shadowColor="#E91E63"
+        android:textColorHint="#E91E63"
+        android:textColorLink="#E91E63"
+        app:layout_constraintStart_toStartOf="@+id/enterAmount"
+        app:layout_constraintTop_toBottomOf="@+id/enterAmount" />
+
+    <TextView
+        android:id="@+id/fromCurrency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/from_currency"
+        android:textColor="#C2C2C2"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/enterAmount"
+        app:layout_constraintTop_toBottomOf="@+id/inputAmount" />
+
+    <Spinner
+        android:id="@+id/dropDown1"
+        android:layout_width="80dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="@+id/fromCurrency"
+        app:layout_constraintTop_toBottomOf="@+id/fromCurrency" />
+
+    <TextView
+        android:id="@+id/selectedCurrencyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text=""
+        android:textColor="#878787"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/dropDown1"
+        app:layout_constraintStart_toStartOf="@+id/dropDown1"
+        app:layout_constraintTop_toTopOf="@+id/dropDown1" />
+
+
+    <TextView
+        android:id="@+id/toCurrency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/to_currency"
+        android:textColor="#C4C4C4"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/fromCurrency"
+        app:layout_constraintTop_toBottomOf="@+id/dropDown1" />
+
+    <Spinner
+        android:id="@+id/dropDown2"
+        android:layout_width="80dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="@+id/toCurrency"
+        app:layout_constraintTop_toBottomOf="@+id/toCurrency" />
+
+
+    <TextView
+        android:id="@+id/selectedCurrencyTextView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text=""
+        android:textColor="#878787"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/dropDown2"
+        app:layout_constraintStart_toStartOf="@+id/dropDown2"
+        app:layout_constraintTop_toTopOf="@+id/dropDown2" />
+
+    <Button
+        android:id="@+id/convertBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:background="@color/LightGrey"
+        android:hapticFeedbackEnabled="false"
+        android:text="@string/convert"
+        android:textColor="#009688"
+        app:cornerRadius="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dropDown2" />
+
+    <EditText
+        android:id="@+id/resultText"
+        android:layout_width="293dp"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Result"
+        android:textColor="#C1C1C1"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/dropDown2"
+        app:layout_constraintTop_toBottomOf="@+id/convertBtn" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

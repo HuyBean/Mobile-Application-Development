@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Localization App</string>
+    <string name="description">Content string: abcxyz</string>
+    <string name="untranslatable" translatable="false">this is the unstanlatable text</string>
+</resources>
