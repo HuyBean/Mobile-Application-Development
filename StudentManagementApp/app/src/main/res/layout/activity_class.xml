@@ -24,12 +24,15 @@
 
     <ListView
         android:id="@+id/list_view_class"
-        android:layout_width="330dp"
-        android:layout_height="495dp"
+        android:layout_width="326dp"
+        android:layout_height="489dp"
         android:layout_marginBottom="8dp"
+        android:divider="@android:color/black"
+        android:dividerHeight="1dp"
         app:layout_constraintBottom_toTopOf="@+id/saveButton2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_screen2" />
     <Button
         android:id="@+id/saveButton2"
         android:layout_width="0dp"

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 
 class SecondActivity : AppCompatActivity() {
@@ -21,6 +22,7 @@ class SecondActivity : AppCompatActivity() {
 
     companion object {
         private const val REQUEST_CODE_SELECT_CLASS = 888
+        private const val REQUEST_CODE_EDIT_STUDENT = 789
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +49,7 @@ class SecondActivity : AppCompatActivity() {
         fullnameEditText.setText(fullname)
         dobEditText.setText(dob)
         textViewClassroom.text = classroom
+        Log.d("TAG", "Giá trị của classroom trong SA là: $classroom")
 
         imageViewClass.setOnClickListener {
             val intentClass = Intent(this, ClassActivity::class.java)
@@ -62,6 +65,7 @@ class SecondActivity : AppCompatActivity() {
                 femaleRadioButton.isChecked -> "Female"
                 else -> "Other"
             }
+            val editedClassroom = textViewClassroom.text.toString()
 
             // Tạo Intent để gửi lại dữ liệu đã chỉnh sửa về MainActivity
             val resultIntent = Intent().apply {
@@ -69,17 +73,19 @@ class SecondActivity : AppCompatActivity() {
                 putExtra("edited_fullname", editedFullName)
                 putExtra("dob", editedDob)
                 putExtra("gender", editedGender)
-                putExtra("classroom", classroom)
+                putExtra("classroom", editedClassroom)
             }
             setResult(Activity.RESULT_OK, resultIntent)
             finish() // Kết thúc SecondActivity và trở về MainActivity
         }
 
         deleteButton.setOnClickListener {
+            val deletedFullName = fullnameEditText.text.toString()
+
             // Tạo Intent để thông báo về việc xóa sinh viên
             val resultIntent = Intent().apply {
                 putExtra("action", "delete")
-                putExtra("fullname", fullname)
+                putExtra("original_fullname", deletedFullName)
             }
             setResult(Activity.RESULT_OK, resultIntent)
             finish() // Kết thúc SecondActivity và trở về MainActivity
@@ -92,8 +98,23 @@ class SecondActivity : AppCompatActivity() {
         if (requestCode == REQUEST_CODE_SELECT_CLASS && resultCode == Activity.RESULT_OK) {
             // Nhận giá trị lớp học được chọn từ Intent
             selectedClassroom = data?.getStringExtra("classroom")
+            Log.d("TAG", "Giá trị của selectedClassroom là: $selectedClassroom")
             // Hiển thị giá trị lớp học trong textViewClassroom
             textViewClassroom.text = selectedClassroom
+        } else if (requestCode == REQUEST_CODE_EDIT_STUDENT && resultCode == Activity.RESULT_OK) {
+            // Handle result from SecondActivity (editing or deleting a student)
+            val action = data?.getStringExtra("action")
+            val originalFullName = data?.getStringExtra("original_fullname")
+
+            if (action == "delete") {
+                // Tạo Intent để thông báo về việc xóa sinh viên và gửi lại kết quả cho MainActivity
+                val resultIntent = Intent().apply {
+                    putExtra("action", "delete")
+                    putExtra("original_fullname", originalFullName)
+                }
+                setResult(Activity.RESULT_OK, resultIntent)
+                finish() // Kết thúc SecondActivity và trở về MainActivity
+            }
         }
     }
 }

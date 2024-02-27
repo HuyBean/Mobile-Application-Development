@@ -25,12 +25,12 @@
 
         <ListView
             android:id="@+id/listView"
-            android:layout_width="337dp"
-            android:layout_height="593dp"
+            android:layout_width="390dp"
+            android:layout_height="609dp"
             android:layout_marginBottom="32dp"
             android:clipToPadding="false"
-            android:divider="@android:color/transparent"
-            android:dividerHeight="8dp"
+            android:divider="@android:color/black"
+            android:dividerHeight="1dp"
             android:padding="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -9,10 +9,10 @@ import android.widget.ImageView
 import android.widget.TextView
 data class Student(
     val icon: Int,
-    val name: String,
-    val classroom: String,
-    val birthday: String,
-    val gender: String
+    var name: String,
+    var classroom: String,
+    var birthday: String,
+    var gender: String
 )
 class StudentAdapter(context: Context, resource: Int, objects: List<Student>) :
     ArrayAdapter<Student>(context, resource, objects) {

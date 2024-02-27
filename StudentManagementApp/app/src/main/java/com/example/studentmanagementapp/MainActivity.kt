@@ -3,6 +3,7 @@ package com.example.studentmanagementapp
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 
@@ -84,12 +85,14 @@ class MainActivity : AppCompatActivity() {
                 val dob = data?.getStringExtra("dob")
                 val gender = data?.getStringExtra("gender")
                 val classroom = data?.getStringExtra("classroom")
-
+                Log.d("TAG", "Giá trị của classroom là: $classroom")
                 val index = students.indexOfFirst { it.name == originalFullName }
                 if (index != -1) {
-                    val editedStudent =
-                        Student(R.drawable.student, editedFullName.toString(), classroom.toString(), dob.toString(), gender.toString())
-                    students[index] = editedStudent
+                    // Update student's information
+                    students[index].name = editedFullName.toString()
+                    students[index].birthday = dob.toString()
+                    students[index].gender = gender.toString()
+                    students[index].classroom = classroom.toString()
                 }
             }
 
