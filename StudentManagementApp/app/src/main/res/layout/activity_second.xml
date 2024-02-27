@@ -29,7 +29,6 @@
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/full_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.574"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,26 +43,10 @@
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:inputType="date"
-        android:text="@string/birthday"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fullnameTextView" />
-
-    <EditText
-        android:id="@+id/classroom"
-        android:layout_width="0dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/classroom"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dobTextView" />
 
     <RadioGroup
         android:id="@+id/radioGroup2"
@@ -76,7 +59,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/classroom">
+        app:layout_constraintTop_toBottomOf="@+id/textViewClassroom">
 
         <RadioButton
             android:id="@+id/male"
@@ -88,7 +71,7 @@
         <RadioButton
             android:id="@+id/female"
             android:layout_width="wrap_content"
-            android:layout_height="48dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/female" />
 
@@ -105,16 +88,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
         android:layout_marginEnd="16dp"
         android:text="@string/gender"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/classroom" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/saveButton2"
+        android:id="@+id/saveButtonSecondActivity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -127,18 +110,70 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/textViewFullName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:ems="10"
+        android:text="@string/full_name"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/fullnameTextView"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewBirthday"
+        android:layout_width="199dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="16dp"
+        android:ems="10"
+        android:text="@string/birthday"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/dobTextView"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewClass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:ems="10"
+        android:text="@string/classroom"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewClassroom"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewClassroom"
+        android:layout_width="317dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="60dp"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dobTextView" />
+
+    <ImageView
+        android:id="@+id/imageViewClass"
+        android:layout_width="49dp"
+        android:layout_height="48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewClassroom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewClassroom"
+        app:layout_constraintTop_toTopOf="@+id/textViewClassroom"
+        app:srcCompat="@android:drawable/arrow_down_float" />
+
     <Button
-        android:id="@+id/deleteButton"
+        android:id="@+id/deleteButton1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="92dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/delete"
         app:cornerRadius="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/saveButtonSecondActivity"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

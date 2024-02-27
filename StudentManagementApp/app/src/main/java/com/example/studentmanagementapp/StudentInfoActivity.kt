@@ -10,18 +10,18 @@ import android.widget.*
 class StudentInfoActivity : AppCompatActivity() {
     private lateinit var fullnameEditText: EditText
     private lateinit var dobEditText: EditText
+    private lateinit var textViewClassroom: TextView
     private lateinit var imageViewClass: ImageView
     private lateinit var maleRadioButton: RadioButton
     private lateinit var femaleRadioButton: RadioButton
     private lateinit var otherGenderRadioButton: RadioButton
 
-//    private val classActivityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-//        if (result.resultCode == Activity.RESULT_OK) {
-//            val data: Intent? = result.data
-//            val selectedValue = data?.getStringExtra("selectedValue")
-//            classroomButton.text = selectedValue
-//        }
-//    }
+    companion object {
+        private const val REQUEST_CODE_SELECT_CLASS = 123
+        // Mã yêu cầu để phân biệt giữa các kết quả
+    }
+
+    private var selectedClassroom: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +29,7 @@ class StudentInfoActivity : AppCompatActivity() {
 
         fullnameEditText = findViewById(R.id.fullnameTextView)
         dobEditText = findViewById(R.id.dobTextView)
+        textViewClassroom = findViewById(R.id.textViewClassroom)
         imageViewClass = findViewById(R.id.imageViewClass)
         maleRadioButton = findViewById(R.id.male)
         femaleRadioButton = findViewById(R.id.female)
@@ -36,14 +37,14 @@ class StudentInfoActivity : AppCompatActivity() {
 
         imageViewClass.setOnClickListener {
             val intentClass = Intent(this, ClassActivity::class.java)
-            startActivity(intentClass)
+            startActivityForResult(intentClass, REQUEST_CODE_SELECT_CLASS)
         }
 
+        // Xử lý nút Save và trở về MainActivity
         val saveButton = findViewById<Button>(R.id.saveButton1)
         saveButton.setOnClickListener {
-            val fullname = fullnameEditText.text.toString()
+            val fullName = fullnameEditText.text.toString()
             val dob = dobEditText.text.toString()
-//            val classroom = imageViewClass.text.toString()
             val gender = when {
                 maleRadioButton.isChecked -> "Male"
                 femaleRadioButton.isChecked -> "Female"
@@ -51,12 +52,25 @@ class StudentInfoActivity : AppCompatActivity() {
             }
 
             val intent = Intent(this, MainActivity::class.java).apply {
-                putExtra("fullname", fullname)
+                putExtra("fullname", fullName)
                 putExtra("dob", dob)
-//                putExtra("classroom", classroom)
                 putExtra("gender", gender)
+                // Thêm giá trị lớp học được chọn vào intent nếu có
+                selectedClassroom?.let { putExtra("classroom", it) }
             }
-            startActivity(intent)
+            setResult(Activity.RESULT_OK, intent)
+            finish() // Kết thúc StudentInfoActivity và trở về MainActivity
+        }
+    }
+
+    // Xử lý kết quả trả về từ ClassActivity
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_SELECT_CLASS && resultCode == Activity.RESULT_OK) {
+            // Nhận giá trị lớp học được chọn từ Intent
+            selectedClassroom = data?.getStringExtra("classroom")
+            // Hiển thị giá trị lớp học trong textViewClassroom
+            textViewClassroom.text = selectedClassroom
         }
     }
 }

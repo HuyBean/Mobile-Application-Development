@@ -59,7 +59,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/textViewClassroom">
 
         <RadioButton
             android:id="@+id/male"
@@ -140,16 +140,16 @@
         android:ems="10"
         android:text="@string/classroom"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toTopOf="@+id/textViewClassroom"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewClassroom"
         android:layout_width="317dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="60dp"
-        android:text="TextView"
+        android:text="21KTPM2"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dobTextView" />
@@ -158,10 +158,10 @@
         android:id="@+id/imageViewClass"
         android:layout_width="49dp"
         android:layout_height="48dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewClassroom"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/textViewClassroom"
+        app:layout_constraintTop_toTopOf="@+id/textViewClassroom"
         app:srcCompat="@android:drawable/arrow_down_float" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
