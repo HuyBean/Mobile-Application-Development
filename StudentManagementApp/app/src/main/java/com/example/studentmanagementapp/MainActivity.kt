@@ -4,8 +4,11 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.*
+import android.widget.ImageButton
+import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
+import java.io.BufferedReader
+import java.io.InputStreamReader
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,11 +27,8 @@ class MainActivity : AppCompatActivity() {
 
         listView = findViewById(R.id.listView)
 
-        // Set up the ListView
-        students.add(Student(R.drawable.student, "Quoc Huy", "21KTPM2", "07/11/2003", "Male"))
-        students.add(Student(R.drawable.student, "Hoang Sang", "21KTPM2", "07/11/2003", "Male"))
-        students.add(Student(R.drawable.student, "Dinh Chuong", "21KTPM2", "07/11/2003", "Male"))
-        students.add(Student(R.drawable.student, "Hai Nam", "21KTPM3", "07/11/2003", "Male"))
+        // Load student data from file
+        students = loadStudentDataFromRawResource(R.raw.my_student_file)
 
         adapter = StudentAdapter(this, R.layout.student_layout, students)
         listView.adapter = adapter
@@ -52,6 +52,31 @@ class MainActivity : AppCompatActivity() {
             }
             startActivityForResult(intent, REQUEST_CODE_EDIT_STUDENT)
         }
+    }
+
+    private fun loadStudentDataFromRawResource(resourceId: Int): ArrayList<Student> {
+        val students = ArrayList<Student>()
+        try {
+            val inputStream = resources.openRawResource(resourceId)
+            val reader = BufferedReader(InputStreamReader(inputStream))
+            var line: String?
+
+            while (reader.readLine().also { line = it } != null) {
+                val studentInfo = line!!.split(",")
+                if (studentInfo.size == 4) {
+                    val name = studentInfo[0]
+                    val classroom = studentInfo[1]
+                    val dob = studentInfo[2]
+                    val gender = studentInfo[3]
+                    val drawableId = R.drawable.student // Assuming you have a default image
+                    students.add(Student(drawableId, name, classroom, dob, gender))
+                }
+            }
+            inputStream.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return students
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -85,7 +110,6 @@ class MainActivity : AppCompatActivity() {
                 val dob = data?.getStringExtra("dob")
                 val gender = data?.getStringExtra("gender")
                 val classroom = data?.getStringExtra("classroom")
-                Log.d("TAG", "Giá trị của classroom là: $classroom")
                 val index = students.indexOfFirst { it.name == originalFullName }
                 if (index != -1) {
                     // Update student's information
@@ -95,7 +119,6 @@ class MainActivity : AppCompatActivity() {
                     students[index].classroom = classroom.toString()
                 }
             }
-
             adapter.notifyDataSetChanged()
         }
     }

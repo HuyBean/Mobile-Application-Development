@@ -20,10 +20,12 @@
 
     <TextView
         android:id="@+id/nameTV"
-        android:layout_width="105dp"
-        android:layout_height="17dp"
+        android:layout_width="248dp"
+        android:layout_height="27dp"
         android:layout_marginStart="32dp"
         android:text="Name"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/iconIV"
         app:layout_constraintTop_toTopOf="@+id/iconIV" />
 
@@ -40,17 +42,22 @@
         android:id="@+id/birthdayTV"
         android:layout_width="104dp"
         android:layout_height="17dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="16dp"
         android:text="Birthday"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="@+id/iconIV"
         app:layout_constraintStart_toStartOf="@+id/classroomTV"
-        app:layout_constraintTop_toBottomOf="@+id/classroomTV" />
+        app:layout_constraintTop_toBottomOf="@+id/classroomTV"
+        app:layout_constraintVertical_bias="0.238" />
 
     <TextView
         android:id="@+id/genderTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="22dp"
         android:layout_marginStart="32dp"
         android:text="Gender"
+        app:layout_constraintBottom_toBottomOf="@+id/birthdayTV"
         app:layout_constraintStart_toEndOf="@+id/birthdayTV"
         app:layout_constraintTop_toTopOf="@+id/birthdayTV" />
 </androidx.constraintlayout.widget.ConstraintLayout>
