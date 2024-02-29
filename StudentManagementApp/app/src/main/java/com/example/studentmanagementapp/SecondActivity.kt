@@ -10,8 +10,7 @@ import android.widget.*
 class SecondActivity : AppCompatActivity() {
     private lateinit var fullnameEditText: EditText
     private lateinit var dobEditText: EditText
-    private lateinit var textViewClassroom: TextView
-    private lateinit var imageViewClass: ImageView
+    private lateinit var editTextClass: EditText
     private lateinit var maleRadioButton: RadioButton
     private lateinit var femaleRadioButton: RadioButton
     private lateinit var otherGenderRadioButton: RadioButton
@@ -31,8 +30,7 @@ class SecondActivity : AppCompatActivity() {
 
         fullnameEditText = findViewById(R.id.fullnameTextView)
         dobEditText = findViewById(R.id.dobTextView)
-        textViewClassroom = findViewById(R.id.textViewClassroom)
-        imageViewClass = findViewById(R.id.imageViewClass)
+        editTextClass = findViewById(R.id.editTextText2)
         maleRadioButton = findViewById(R.id.male)
         femaleRadioButton = findViewById(R.id.female)
         otherGenderRadioButton = findViewById(R.id.otherGender)
@@ -48,10 +46,11 @@ class SecondActivity : AppCompatActivity() {
         // Hiển thị dữ liệu của sinh viên trong giao diện để người dùng có thể chỉnh sửa
         fullnameEditText.setText(fullname)
         dobEditText.setText(dob)
-        textViewClassroom.text = classroom
+        editTextClass.setText(classroom)
+
         Log.d("TAG", "Giá trị của classroom trong SA là: $classroom")
 
-        imageViewClass.setOnClickListener {
+        editTextClass.setOnClickListener {
             val intentClass = Intent(this, ClassActivity::class.java)
             startActivityForResult(intentClass, REQUEST_CODE_SELECT_CLASS)
         }
@@ -65,7 +64,7 @@ class SecondActivity : AppCompatActivity() {
                 femaleRadioButton.isChecked -> "Female"
                 else -> "Other"
             }
-            val editedClassroom = textViewClassroom.text.toString()
+            val editedClassroom = editTextClass.text.toString()
 
             // Tạo Intent để gửi lại dữ liệu đã chỉnh sửa về MainActivity
             val resultIntent = Intent().apply {
@@ -99,7 +98,7 @@ class SecondActivity : AppCompatActivity() {
             // Nhận giá trị lớp học được chọn từ Intent
             selectedClassroom = data?.getStringExtra("classroom")
             Log.d("TAG", "Giá trị của selectedClassroom là: $selectedClassroom")
-            textViewClassroom.text = selectedClassroom
+            editTextClass.setText(selectedClassroom)
         } else if (requestCode == REQUEST_CODE_EDIT_STUDENT && resultCode == Activity.RESULT_OK) {
             val action = data?.getStringExtra("action")
             val originalFullName = data?.getStringExtra("original_fullname")

@@ -29,6 +29,7 @@
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:text="Input name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.574"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,6 +44,7 @@
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:inputType="date"
+        android:text="Input birthday"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +61,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewClassroom">
+        app:layout_constraintTop_toBottomOf="@+id/editTextText">
 
         <RadioButton
             android:id="@+id/male"
@@ -140,28 +142,25 @@
         android:ems="10"
         android:text="@string/classroom"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewClassroom"
+        app:layout_constraintBottom_toTopOf="@+id/editTextText"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/textViewClassroom"
-        android:layout_width="317dp"
+    <EditText
+        android:id="@+id/editTextText"
+        android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="60dp"
-        android:text="21KTPM2"
-        android:textSize="20sp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Choose Class"
+        android:focusable="false"
+        android:clickable="true"
+        android:visibility="visible"
+        android:drawableEnd="@drawable/ic_arrow_down"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dobTextView" />
-
-    <ImageView
-        android:id="@+id/imageViewClass"
-        android:layout_width="49dp"
-        android:layout_height="48dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewClassroom"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewClassroom"
-        app:layout_constraintTop_toTopOf="@+id/textViewClassroom"
-        app:srcCompat="@android:drawable/arrow_down_float" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

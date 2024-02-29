@@ -2,7 +2,6 @@ package com.example.studentmanagementapp
 
 import android.app.Activity
 import android.content.Intent
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
@@ -10,8 +9,7 @@ import android.widget.*
 class StudentInfoActivity : AppCompatActivity() {
     private lateinit var fullnameEditText: EditText
     private lateinit var dobEditText: EditText
-    private lateinit var textViewClassroom: TextView
-    private lateinit var imageViewClass: ImageView
+    private lateinit var editTextClass: EditText
     private lateinit var maleRadioButton: RadioButton
     private lateinit var femaleRadioButton: RadioButton
     private lateinit var otherGenderRadioButton: RadioButton
@@ -29,13 +27,12 @@ class StudentInfoActivity : AppCompatActivity() {
 
         fullnameEditText = findViewById(R.id.fullnameTextView)
         dobEditText = findViewById(R.id.dobTextView)
-        textViewClassroom = findViewById(R.id.textViewClassroom)
-        imageViewClass = findViewById(R.id.imageViewClass)
+        editTextClass = findViewById(R.id.editTextText)
         maleRadioButton = findViewById(R.id.male)
         femaleRadioButton = findViewById(R.id.female)
         otherGenderRadioButton = findViewById(R.id.otherGender)
 
-        imageViewClass.setOnClickListener {
+        editTextClass.setOnClickListener {
             val intentClass = Intent(this, ClassActivity::class.java)
             startActivityForResult(intentClass, REQUEST_CODE_SELECT_CLASS)
         }
@@ -69,8 +66,8 @@ class StudentInfoActivity : AppCompatActivity() {
         if (requestCode == REQUEST_CODE_SELECT_CLASS && resultCode == Activity.RESULT_OK) {
             // Nhận giá trị lớp học được chọn từ Intent
             selectedClassroom = data?.getStringExtra("classroom")
-            // Hiển thị giá trị lớp học trong textViewClassroom
-            textViewClassroom.text = selectedClassroom
+            // Hiển thị giá trị lớp học trong editTextClass
+            editTextClass.setText(selectedClassroom ?: "Choose Class")
         }
     }
 }
