@@ -12,15 +12,16 @@ class ClassActivity : AppCompatActivity() {
 
     private lateinit var saveButton: Button
     private lateinit var selectedClassroom: String
+    private lateinit var listView: ListView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_class)
 
         saveButton = findViewById(R.id.saveButton2)
-        val listView = findViewById<ListView>(R.id.list_view_class)
+        listView = findViewById(R.id.list_view_class)
 
-        // Populate the classrooms list by reading from the raw resource file
+        // Đọc danh sách lớp học từ file resource
         val classrooms = readClassroomsFromRawResource(R.raw.my_class_file)
 
         val adapter = ClassAdapter(this, R.layout.class_layout, classrooms)
@@ -45,9 +46,9 @@ class ClassActivity : AppCompatActivity() {
             val inputStream = resources.openRawResource(resourceId)
             val reader = BufferedReader(InputStreamReader(inputStream))
             var line: String?
-            // Read each line from the file
+
             while (reader.readLine().also { line = it } != null) {
-                // Split the line by comma and add each class name to the list
+                // Ngăn cách các thông tin bởi dấu phẩy
                 val classNames = line?.split(",") ?: emptyList()
                 for (className in classNames) {
                     classrooms.add(Class(R.drawable.study, className.trim()))

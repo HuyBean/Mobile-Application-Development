@@ -99,10 +99,8 @@ class SecondActivity : AppCompatActivity() {
             // Nhận giá trị lớp học được chọn từ Intent
             selectedClassroom = data?.getStringExtra("classroom")
             Log.d("TAG", "Giá trị của selectedClassroom là: $selectedClassroom")
-            // Hiển thị giá trị lớp học trong textViewClassroom
             textViewClassroom.text = selectedClassroom
         } else if (requestCode == REQUEST_CODE_EDIT_STUDENT && resultCode == Activity.RESULT_OK) {
-            // Handle result from SecondActivity (editing or deleting a student)
             val action = data?.getStringExtra("action")
             val originalFullName = data?.getStringExtra("original_fullname")
 

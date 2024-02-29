@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
+
+// Khai báo lớp Student
 data class Student(
     val icon: Int,
     var name: String,
