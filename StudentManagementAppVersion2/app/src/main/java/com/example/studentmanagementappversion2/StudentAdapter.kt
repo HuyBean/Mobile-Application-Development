@@ -7,11 +7,17 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class StudentAdapter(private val students: List<Student>, private val listener: OnItemClickListener) :
+class StudentAdapter(private var students: List<Student>, private val listener: OnItemClickListener) :
     RecyclerView.Adapter<StudentAdapter.ViewHolder>() {
 
     interface OnItemClickListener {
         fun onItemClick(student: Student)
+    }
+
+    // Thêm phương thức này để cập nhật dữ liệu
+    fun updateList(newList: List<Student>) {
+        students = newList
+        notifyDataSetChanged()
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
