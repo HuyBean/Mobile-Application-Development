@@ -1,0 +1,20 @@
+[
+  {
+    "name": "John Doe",
+    "className": "Class A",
+    "dob": "01/01/2000",
+    "gender": "Male"
+  },
+  {
+    "name": "Jane Smith",
+    "className": "Class B",
+    "dob": "02/02/2001",
+    "gender": "Female"
+  },
+  {
+    "name": "Mike Johnson",
+    "className": "Class C",
+    "dob": "03/03/2002",
+    "gender": "Male"
+  }
+]

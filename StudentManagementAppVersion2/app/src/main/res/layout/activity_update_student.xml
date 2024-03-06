@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="#AC1A1A"
     tools:context=".MainActivity">
 
     <TextView
@@ -60,7 +59,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText2">
+        app:layout_constraintTop_toBottomOf="@+id/classSpinner">
 
         <RadioButton
             android:id="@+id/male"
@@ -104,6 +103,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="32dp"
+        android:backgroundTint="#4CAF50"
         android:text="@string/save"
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -140,23 +140,16 @@
         android:ems="10"
         android:text="@string/classroom"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextText2"
-        app:layout_constraintStart_toStartOf="@+id/editTextText2" />
+        app:layout_constraintBottom_toTopOf="@+id/classSpinner"
+        app:layout_constraintStart_toStartOf="@+id/classSpinner" />
 
-    <EditText
-        android:id="@+id/editTextText2"
+    <Spinner
+        android:id="@+id/classSpinner"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="72dp"
         android:layout_marginEnd="16dp"
-        android:clickable="true"
-        android:drawableEnd="@drawable/ic_arrow_down"
-        android:ems="10"
-        android:focusable="false"
-        android:inputType="text"
-        android:text="Choose Class"
-        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dobTextView" />
@@ -168,7 +161,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="#9F1E1E"
+        android:backgroundTint="#FF5722"
         android:text="@string/delete"
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toTopOf="@+id/saveButtonSecondActivity"
