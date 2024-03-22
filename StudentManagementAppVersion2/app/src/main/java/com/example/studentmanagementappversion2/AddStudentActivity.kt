@@ -1,27 +1,26 @@
 package com.example.studentmanagementappversion2
 
-import Student
+import android.app.DatePickerDialog
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.RadioGroup
-import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
-import java.io.File
-import java.io.FileOutputStream
+import androidx.fragment.app.DialogFragment
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
-class AddStudentActivity : AppCompatActivity() {
+class AddStudentActivity : AppCompatActivity(), NoticeDialogListener{
     private val classNames = arrayOf("21KTPM1", "21KTPM2", "21KTPM3") // Các lớp học
-    private lateinit var classSpinner: Spinner
+    private lateinit var classBtn: TextView
     private lateinit var saveButton: Button
     private lateinit var fullNameEditText: EditText
-    private lateinit var birthdayEditText: EditText
+    private lateinit var birthdayTV: TextView
     private lateinit var genderRadioGroup: RadioGroup
     private lateinit var maleRadioButton: RadioButton
     private lateinit var femaleRadioButton: RadioButton
@@ -32,18 +31,24 @@ class AddStudentActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_student)
 
         // Ánh xạ các thành phần giao diện người dùng
-        classSpinner = findViewById(R.id.classSpinner)
+        classBtn = findViewById(R.id.classBtn)
         saveButton = findViewById(R.id.saveButton1)
         fullNameEditText = findViewById(R.id.fullnameTextView)
-        birthdayEditText = findViewById(R.id.dobTextView)
+        birthdayTV = findViewById(R.id.dobTextView)
         genderRadioGroup = findViewById(R.id.radioGroup2)
         maleRadioButton = findViewById(R.id.male)
         femaleRadioButton = findViewById(R.id.female)
         otherRadioButton = findViewById(R.id.otherGender)
 
-        // Thiết lập Adapter cho Spinner lựa chọn lớp học
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, classNames)
-        classSpinner.adapter = adapter
+        // Xử lý khi nhấn vào EditText Birthday
+        birthdayTV.setOnClickListener {
+            showDatePickerDialog()
+        }
+
+        classBtn.setOnClickListener{
+            val dialog = PopupFragment()
+            dialog.show(supportFragmentManager, "PopupFragment")
+        }
 
         // Xử lý sự kiện khi nhấn nút lưu
         saveButton.setOnClickListener {
@@ -53,8 +58,8 @@ class AddStudentActivity : AppCompatActivity() {
 
     private fun saveStudent() {
         val name = fullNameEditText.text.toString()
-        val birthday = birthdayEditText.text.toString()
-        val className = classSpinner.selectedItem.toString()
+        val birthday = birthdayTV.text.toString()
+        val className = classBtn.text.toString()
         val gender = when (genderRadioGroup.checkedRadioButtonId) {
             R.id.male -> "Male"
             R.id.female -> "Female"
@@ -67,19 +72,6 @@ class AddStudentActivity : AppCompatActivity() {
             return
         }
 
-        val student = Student(name, className, birthday, gender)
-
-        // Lưu thông tin sinh viên vào tệp JSON
-        val filePath = File(filesDir, "students.json").absolutePath
-        val json = Json.encodeToString(student)
-        val file = File(filePath)
-        if (!file.exists()) {
-            file.createNewFile()
-        }
-        val outputStream = FileOutputStream(file, true)
-        outputStream.write(json.toByteArray())
-        outputStream.close()
-
         // Trả về kết quả cho MainActivity để cập nhật danh sách sinh viên
         val resultIntent = intent.apply {
             putExtra("new_student_name", name)
@@ -88,8 +80,33 @@ class AddStudentActivity : AppCompatActivity() {
             putExtra("new_student_gender", gender)
         }
         setResult(RESULT_OK, resultIntent)
-
+        Log.d("AddStudentActivity", "Student saved successfully")
         Toast.makeText(this, "Student saved successfully", Toast.LENGTH_SHORT).show()
         finish() // Trở về MainActivity sau khi lưu sinh viên thành công
     }
+
+    private fun showDatePickerDialog() {
+        val datePicker = DatePickerDialog(
+            this,
+            { _, year, monthOfYear, dayOfMonth ->
+                // Đặt ngày tháng đã chọn vào EditText
+                val calendar = Calendar.getInstance()
+                calendar.set(year, monthOfYear, dayOfMonth)
+                val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                val formattedDate = sdf.format(calendar.time)
+                birthdayTV.setText(formattedDate)
+            },
+            // Đặt ngày tháng mặc định cho DatePicker (có thể là ngày hiện tại)
+            Calendar.getInstance().get(Calendar.YEAR),
+            Calendar.getInstance().get(Calendar.MONTH),
+            Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+        )
+        datePicker.show()
+    }
+
+    override fun onDialogPositiveClick(dialog: DialogFragment, selectedItems: String)
+    {
+        classBtn.text = selectedItems
+    }
+
 }

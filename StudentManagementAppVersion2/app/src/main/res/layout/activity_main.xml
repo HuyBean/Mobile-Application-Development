@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,6 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="@string/Students"
+            android:textColor="@color/black"
             android:textSize="34sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -30,18 +32,22 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:hint="Search"
+            android:textColor="@color/black"
             android:minHeight="48dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/switch1" />
 
-        <ToggleButton
+        <Button
             android:id="@+id/layoutToggleButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:backgroundTint="#FFEB3B"
             android:text="Search"
+            android:textColor="@color/black"
             android:textOff="Search"
             android:textOn="Search"
+            app:cornerRadius="18dp"
             app:layout_constraintStart_toEndOf="@+id/searchAutoCompleteTextView"
             app:layout_constraintTop_toTopOf="@+id/searchAutoCompleteTextView" />
 
@@ -75,6 +81,7 @@
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:text="Change layout"
+            android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"

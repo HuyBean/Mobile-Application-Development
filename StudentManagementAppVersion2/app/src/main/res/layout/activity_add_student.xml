@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
     <EditText
@@ -28,6 +29,7 @@
         android:layout_marginTop="60dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
+        android:textColor="@color/black"
         android:hint="Input your full name"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +37,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleScreen1" />
 
-    <EditText
+    <TextView
         android:id="@+id/dobTextView"
         android:layout_width="0dp"
         android:layout_height="48dp"
@@ -44,12 +46,23 @@
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:hint="Input your birthday"
+        android:textSize="18sp"
+        android:textColor="@color/black"
         android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fullnameTextView" />
 
+    <ImageView
+        android:id="@+id/calendarImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/ic_menu_my_calendar"
+        android:translationZ="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/dobTextView"
+        app:layout_constraintEnd_toEndOf="@+id/dobTextView"
+        app:layout_constraintTop_toTopOf="@+id/dobTextView" />
     <RadioGroup
         android:id="@+id/radioGroup2"
         android:layout_width="378dp"
@@ -61,13 +74,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/classSpinner">
+        app:layout_constraintTop_toBottomOf="@+id/classBtn">
 
         <RadioButton
             android:id="@+id/male"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_weight="1"
+            android:textColor="@color/black"
             android:text="@string/male" />
 
         <RadioButton
@@ -75,6 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:textColor="@color/black"
             android:text="@string/female" />
 
         <RadioButton
@@ -82,6 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_weight="1"
+            android:textColor="@color/black"
             android:text="@string/other_gender" />
     </RadioGroup>
 
@@ -93,6 +109,7 @@
         android:layout_marginEnd="16dp"
         android:text="@string/gender"
         android:textSize="20sp"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/radioGroup2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -107,6 +124,7 @@
         android:layout_marginBottom="32dp"
         android:backgroundTint="#4CAF50"
         android:text="@string/save"
+        android:textColor="@color/white"
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -120,17 +138,20 @@
         android:layout_marginStart="16dp"
         android:ems="10"
         android:text="@string/full_name"
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/fullnameTextView"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textViewBirthday"
-        android:layout_width="199dp"
-        android:layout_height="38dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
         android:ems="10"
         android:text="@string/birthday"
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/dobTextView"
         app:layout_constraintStart_toStartOf="parent" />
@@ -140,14 +161,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
         android:ems="10"
         android:text="@string/classroom"
+        android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/classSpinner"
+        app:layout_constraintBottom_toTopOf="@+id/classBtn"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Spinner
-        android:id="@+id/classSpinner"
+    <TextView
+        android:id="@+id/classBtn"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
@@ -155,6 +178,13 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:cornerRadius="0dp"
+        android:hint="Select Class"
+        android:gravity="start"
+        android:textSize="18sp"
+        android:ems="10"
+        android:textColor="@color/black"
+        android:backgroundTint="#00000000"
         app:layout_constraintTop_toBottomOf="@+id/dobTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -33,7 +33,6 @@ class MainActivity : ComponentActivity() {
 
 
     }
-
     private fun requestForPermission(): Boolean {
         var isPermissionOn = true
         if (Build.VERSION.SDK_INT >= 23) {

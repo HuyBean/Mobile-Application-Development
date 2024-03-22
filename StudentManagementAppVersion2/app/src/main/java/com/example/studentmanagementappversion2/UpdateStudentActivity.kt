@@ -1,20 +1,25 @@
 package com.example.studentmanagementappversion2
 
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
-import android.widget.Spinner
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
-class UpdateStudentActivity : AppCompatActivity() {
+class UpdateStudentActivity : AppCompatActivity(), NoticeDialogListener {
     private lateinit var fullNameTV: EditText
-    private lateinit var dobTV: EditText
-    private lateinit var spinner: Spinner
+    private lateinit var dobTV: TextView
+    private lateinit var classTV: TextView
     private lateinit var maleButton: RadioButton
     private lateinit var femaleButton: RadioButton
     private lateinit var otherButton: RadioButton
@@ -27,7 +32,7 @@ class UpdateStudentActivity : AppCompatActivity() {
 
         fullNameTV = findViewById(R.id.fullnameTextView)
         dobTV = findViewById(R.id.dobTextView)
-        spinner = findViewById(R.id.classSpinner)
+        classTV = findViewById(R.id.classTV)
         maleButton = findViewById(R.id.male)
         femaleButton = findViewById(R.id.female)
         otherButton = findViewById(R.id.otherGender)
@@ -44,17 +49,9 @@ class UpdateStudentActivity : AppCompatActivity() {
         fullNameTV.setText(studentName)
         dobTV.setText(studentBirthday)
 
-        // Thiết lập dữ liệu cho Spinner
-        val spinnerArray = arrayOf("21KTPM1", "21KTPM2", "21KTPM3") // Thay bằng danh sách lớp học thực tế của bạn
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, spinnerArray)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner.adapter = adapter
-
-        // Tìm vị trí của giá trị studentClassroom trong mảng spinnerArray
-        val position = spinnerArray.indexOf(studentClassroom)
-        // Nếu tìm thấy, chọn giá trị tương ứng trong Spinner
-        if (position != -1) {
-            spinner.setSelection(position)
+        classTV.setOnClickListener{
+            val dialog = PopupFragment()
+            dialog.show(supportFragmentManager, "PopupFragment")
         }
 
         when (studentGender) {
@@ -63,12 +60,18 @@ class UpdateStudentActivity : AppCompatActivity() {
             "Other" -> otherButton.isChecked = true
         }
 
+        // Xử lý khi nhấn vào EditText Birthday
+        dobTV.setOnClickListener {
+            showDatePickerDialog()
+        }
+
         // Xử lý khi nhấn nút Save
         saveButton.setOnClickListener {
             // Trả về kết quả với dữ liệu đã cập nhật
             val resultIntent = Intent().apply {
+                putExtra("student_id", intent.getIntExtra("student_id", -1))
                 putExtra("edit_student_name", fullNameTV.text.toString())
-                putExtra("edit_student_classroom", spinner.selectedItem.toString())
+                putExtra("edit_student_classroom", classTV.text.toString())
                 putExtra("edit_student_birthday", dobTV.text.toString())
                 putExtra("edit_student_gender", when {
                     maleButton.isChecked -> "Male"
@@ -77,20 +80,59 @@ class UpdateStudentActivity : AppCompatActivity() {
                 })
             }
             setResult(Activity.RESULT_OK, resultIntent)
+            Toast.makeText(this, "Student has been updated", Toast.LENGTH_SHORT).show()
             finish() // Kết thúc UpdateStudentActivity
         }
 
         // Xử lý khi nhấn nút Delete
         deleteButton.setOnClickListener {
-            // Gửi dữ liệu để xóa
-            val resultIntent = Intent().apply {
-                putExtra("delete_student_name", studentName)
-                putExtra("delete_student_classroom", studentClassroom)
-                putExtra("delete_student_birthday", studentBirthday)
-                putExtra("delete_student_gender", studentGender)
+            // Hiển thị hộp thoại xác nhận xóa
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Confirm Delete")
+            builder.setMessage("Are you sure you want to delete this student?")
+            builder.setPositiveButton("Yes") { _, _ ->
+                // Gửi dữ liệu để xóa
+                val resultIntent = Intent().apply {
+                    putExtra("student_id", intent.getIntExtra("student_id", -1))
+                    putExtra("delete_student_name", studentName)
+                    putExtra("delete_student_classroom", studentClassroom)
+                    putExtra("delete_student_birthday", studentBirthday)
+                    putExtra("delete_student_gender", studentGender)
+                }
+                setResult(Activity.RESULT_OK, resultIntent)
+                Toast.makeText(this, "Student has been deleted", Toast.LENGTH_SHORT).show()
+                finish() // Kết thúc UpdateStudentActivity
             }
-            setResult(Activity.RESULT_OK, resultIntent)
-            finish() // Kết thúc UpdateStudentActivity
+            builder.setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }
+            val alertDialog = builder.create()
+            alertDialog.show()
         }
+    }
+
+    // Hàm hiển thị DatePicker
+    private fun showDatePickerDialog() {
+        val datePicker = DatePickerDialog(
+            this,
+            { _, year, monthOfYear, dayOfMonth ->
+                // Đặt ngày tháng đã chọn vào EditText
+                val calendar = Calendar.getInstance()
+                calendar.set(year, monthOfYear, dayOfMonth)
+                val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                val formattedDate = sdf.format(calendar.time)
+                dobTV.setText(formattedDate)
+            },
+            // Đặt ngày tháng mặc định cho DatePicker (có thể là ngày hiện tại)
+            Calendar.getInstance().get(Calendar.YEAR),
+            Calendar.getInstance().get(Calendar.MONTH),
+            Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+        )
+        datePicker.show()
+    }
+
+    override fun onDialogPositiveClick(dialog: DialogFragment, selectedItems: String)
+    {
+        classTV.text = selectedItems
     }
 }
